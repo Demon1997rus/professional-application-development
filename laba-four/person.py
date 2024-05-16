@@ -93,7 +93,7 @@ class Person:
         self.__age = value
 
     @staticmethod
-    def isAdult(age):
+    def is_adult(age):
         """
         Статический метод - возращает true если возраст выше совершеннолетнего, в противном случае false
         """

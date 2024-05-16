@@ -35,14 +35,11 @@ class StudentList:
     def __init__(self):
         self.__items = []
 
-    def add(self, item):
+    def add(self, number, fullname, email, age, group):
         """
         Метод добавления объекта студента в список.
-
-        Args:
-            item: Объект студента для добавления в список.
         """
-        self.__items.append(item)
+        self.__items.append(Student(number, fullname, email, age, group))
 
     def __getitem__(self, index):
         """
@@ -78,7 +75,10 @@ class StudentList:
         """
         Метод возвращает строковое представление StudentList.
         """
-        return str(self.__items)
+        value = ""
+        for item in self.__items:
+            value += item.__str__() + '\n'
+        return str(value)
 
     def __setattr__(self, key, value):
         """
@@ -88,6 +88,18 @@ class StudentList:
             self.__dict__[key] = value
         else:
             raise AttributeError
+
+    def sorting(self, key=None, reverse=False):
+        """
+        Сортировка итемов
+        """
+        self.__items = sorted(self.__items, key=key, reverse=reverse)
+
+    def remove_items(self, condition):
+        """
+        Удаление элементов по условию
+        """
+        self.__items = [item for item in self.__items if not condition(item)]
 
 
 def student_generator(qty, names, min_age, max_age, groups):
